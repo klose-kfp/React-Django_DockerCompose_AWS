@@ -2,7 +2,7 @@
 
  docker compose -f docker-compose.prod.yml build 
  docker compose -f docker-compose.prod.yml run app sh -c "npm install && npm run build"
-(→本番環境での開発・動作検証時
+(→本番環境を用いての開発・動作検証時
  docker compose -f docker-compose.prod.yml run app sh -c "npm install && npm run build:dev")
 
  docker compose -f docker-compose.prod.yml run backend python manage.py makemigrations backend

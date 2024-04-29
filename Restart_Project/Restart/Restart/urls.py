@@ -6,11 +6,13 @@ from django.shortcuts import redirect
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include("user.urls")),
     path("", include("backend.urls")),
+    path("api/", include("user.urls")),
     path("api/auth/", include("djoser.urls")),
     path("api/auth/", include("djoser.urls.jwt")),
-    path("", lambda r: redirect("https://" + r.get_host() + r.path)),
+    # HTTPS通信時
+    # path("", lambda r: redirect("https://" + r.get_host() + r.path)),
 ]
+# 開発環境時に静的ファイルを提供
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

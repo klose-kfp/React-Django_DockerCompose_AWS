@@ -17,7 +17,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# 本番環境にて使用(nginx用)
 # FORCE_SCRIPT_NAME = "/django"
 
 # Quick-start development settings - unsuitable for production
@@ -65,16 +65,6 @@ MIDDLEWARE = [
     # "sslserver.middleware.SSLRedirectMiddleware",
 ]
 
-# これがあると、接続拒否になる。ヘッダーが違う的な。。。
-# CORS_ALLOW_HEADERS = [
-#     "Example-Header",
-# ]
-
-
-# CORS_EXPOSE_HEADERS = [
-#     "my-custom-header",
-# ]
-
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = ("http://localhost:3000", "http://13.115.68.125")
 
@@ -86,40 +76,10 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://13.115.68.125"]
 
-# CORS_ALLOW_ALL_ORIGINS = (
-#     True  # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-# )
-
-# CORS_ALLOW_METHODS = [
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# ]
-
-# CORS_ALLOW_HEADERS = [
-#     "accept",
-#     "accept-encoding",
-#     "authorization",
-#     "content-type",
-#     "dnt",
-#     "origin",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with",
-#     "access-control-allow-origin",
-# ]
-
-
+# HTTPS通信時に使用
 # SECURE_SSL_REDIRECT = True
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
-
-# SECURE_BROWSER_XSS_FILTER = True
-# SECURE_CONTENT_TYPE_NOSNIFF = True
-# X_FRAME_OPTIONS = "DENY"
 
 ROOT_URLCONF = "Restart.urls"
 
@@ -212,12 +172,8 @@ REST_USE_JWT = True
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # "rest_framework.authentication.SessionAuthentication",
-        # "rest_framework.authentication.BasicAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    # "NON_FIELD_ERRORS_KEY": "detail",  # 変更
-    # "TEST_REQUEST_DEFAULT_FORMAT": "json",  # 変更
 }
 
 SIMPLE_JWT = {
@@ -231,6 +187,7 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 }
 
+# Djoser用設定
 DJOSER = {
     # メールアドレスでログイン
     "LOGIN_FIELD": "email",

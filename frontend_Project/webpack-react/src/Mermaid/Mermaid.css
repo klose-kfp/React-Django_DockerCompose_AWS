@@ -1,0 +1,32 @@
+.mermaids{
+    height: 100%!important;
+    width: 100%!important;
+    display: flex;
+    justify-content: center;
+}
+.mermaids svg {
+    width:85%;
+    max-width: 90vw!important;
+}
+.mermaids-temp{
+    width: 100%!important;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3%;
+}
+
+.mermaids-temp svg{
+    width:85%;
+    max-width: 90vw!important;
+}
+
+.mermaid-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+}
+
+.mermaids-temp svg g text tspan {
+    background-color: cornflowerblue!important;
+}
