@@ -1,0 +1,25 @@
+ ○起動時のコマンド
+
+ docker compose -f docker-compose.prod.yml build 
+ docker compose -f docker-compose.prod.yml run app sh -c "npm install && npm run build"
+(→本番環境での開発・動作検証時
+ docker compose -f docker-compose.prod.yml run app sh -c "npm install && npm run build:dev")
+
+ docker compose -f docker-compose.prod.yml run backend python manage.py makemigrations backend
+ docker-compose -f docker-compose.prod.yml run backend python manage.py migrate
+ docker compose -f docker-compose.prod.yml up 
+
+○その他
+
+ docker compose -f docker-compose.prod.yml exec app sh
+→ コンテナ内に入るコマンド
+
+
+ docker-compose -f docker-compose.prod.yml run backend sh -c "mkdir -p /Restart/ssl/ && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /Restart/ssl/key.pem -out /Restart/ssl/cert.pem -subj '/C=US/ST=State/L=City/O=Organization/OU=Unit/CN=localhost'"
+→ 本番環境でDockerコンテナ内に SSL証明書の生成
+ (.envを、/django/に)
+ 
+(EC2時は出力先ディレクトリが異なる
+docker-compose -f docker-compose.prod.yml run app sh -c "cd ..  && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/key.pem -out /etc/nginx/ssl/cert.pem")
+
+

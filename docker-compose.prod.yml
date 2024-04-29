@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./frontend_Project
+      dockerfile: docker/node/Dockerfile
+    volumes:
+      - ./frontend_Project/webpack-babel-react-env:/app
+      - ./frontend_Project/docker/node/nginx.conf:/etc/nginx/nginx.conf
+      - front_node_modules:/app/node_modules
+      - front_build:/app/build
+    ports:
+      - "443:443"
+
+  backend:
+    build:
+      context: ./Restart_Project
+      dockerfile: docker/python/Dockerfile
+      # dockerfile: docker/python/Dockerfile.prod
+    volumes:
+      - ./Restart_Project/Restart:/Restart
+      - ./Restart_Project/Restart/staticfiles:/Restart/staticfiles
+    command: python3 /Restart/manage.py runserver 0.0.0.0:8000
+    # command: python3 /Restart/manage.py runsslserver 0.0.0.0:8000 --cert /Restart/ssl/cert.pem --key /Restart/ssl/key.pem
+    ports:
+      - "8000:8000"
+    tty: true
+volumes:
+  front_node_modules:
+  front_build:

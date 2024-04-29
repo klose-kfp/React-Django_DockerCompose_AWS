@@ -1,0 +1,11 @@
+FROM python:3.11
+
+# OpenSSLをインストール（未インストールの場合）
+RUN apt-get update && apt-get install -y openssl
+
+RUN mkdir /Restart
+WORKDIR /Restart
+
+# requirements.txtをコピーして依存関係をインストール
+ADD requirements.txt /Restart/
+RUN pip install -r requirements.txt

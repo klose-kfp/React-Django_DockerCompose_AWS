@@ -1,0 +1,7 @@
+# まずはビルド用のステージを定義
+FROM node:18-alpine
+WORKDIR /app
+
+COPY ./webpack-babel-react-env/package.json ./
+RUN npm install
+COPY ./ ./

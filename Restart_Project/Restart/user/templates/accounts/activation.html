@@ -1,0 +1,19 @@
+{% block subject %}
+【F-IT】本登録のご案内
+{% endblock subject %}
+
+{% block text_body %}
+{{ name }}様
+
+F-ITへご登録頂きまして、誠にありがとうございます。
+
+以下のリンクから本登録を完了してください。
+https://f-it-first.com/{{ url|safe }}
+
+本登録完了後、ログインが可能になります。
+
+-------------------------------
+発行元 : F-IT
+-------------------------------
+
+{% endblock text_body %}
